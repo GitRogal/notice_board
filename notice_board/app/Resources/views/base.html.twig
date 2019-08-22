@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+{% block head %}
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Tablica Ogłoszeń{% endblock %}</title>
@@ -8,9 +9,11 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 </head>
-<body>
-<div class="container">
-    {% block body %}
+{% endblock %}
+{% block body %}
+    <body>
+
+    <div class="container">
 
         <div class="header">
             <a href="/" class="plink"><h1>Tablica ogłoszeń</h1></a>
@@ -27,21 +30,24 @@
                             <li><a href="/">Domy</a></li>
                         </ul>
                     </li>
+                    <li><a href="{{ path('notices_new') }}">Dodaj ogłoszenie</a></a>
                     <li><a href="/register">Zarejestruj się</a></li>
                     <li><a href="/login">Zaloguj się</a></li>
                 </ol>
             </div>
         {% endblock %}
 
-        <div class="comments">
-            <form action="/html/tags/html_form_tag_action.cfm" method="post">
-                <div>
+        {% block comments %}
+            <div class="comments">
+                <form action="/html/tags/html_form_tag_action.cfm" method="post">
+                    <div>
             <textarea name="comments" id="comments" style="font-family:sans-serif; font-size:1.2em;">Hej... napisz komentarz!
             </textarea>
-                </div>
-                <input type="submit" value="Dodaj komentarz">
-            </form>
-        </div>
+                    </div>
+                    <input type="submit" value="Dodaj komentarz">
+                </form>
+            </div>
+        {% endblock %}
 
         <div class="search-bar">
             <form method="GET" action="" class="js-sea-search sea-search">
@@ -49,12 +55,12 @@
                        class="search-input">
             </form>
         </div>
+    </div>
 
+    {% block javascripts %}
+        <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
     {% endblock %}
-</div>
-{% block javascripts %}
-    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    </body>
 {% endblock %}
-</body>
 </html>

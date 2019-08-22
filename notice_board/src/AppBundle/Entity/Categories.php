@@ -24,29 +24,15 @@ class Categories
     /**
      * @var string
      *
-     * @ORM\Column(name="car", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $car;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="house", type="string", length=255)
-     */
-    private $house;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="furniture", type="string", length=255)
-     */
-    private $furniture;
+    private $name;
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -54,74 +40,26 @@ class Categories
     }
 
     /**
-     * Set car
+     * Set name
      *
-     * @param string $car
+     * @param string $name
      *
      * @return Categories
      */
-    public function setCar($car)
+    public function setName($name)
     {
-        $this->car = $car;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get car
+     * Get name
      *
      * @return string
      */
-    public function getCar()
+    public function getName()
     {
-        return $this->car;
-    }
-
-    /**
-     * Set house
-     *
-     * @param string $house
-     *
-     * @return Categories
-     */
-    public function setHouse($house)
-    {
-        $this->house = $house;
-
-        return $this;
-    }
-
-    /**
-     * Get house
-     *
-     * @return string
-     */
-    public function getHouse()
-    {
-        return $this->house;
-    }
-
-    /**
-     * Set furniture
-     *
-     * @param string $furniture
-     *
-     * @return Categories
-     */
-    public function setFurniture($furniture)
-    {
-        $this->furniture = $furniture;
-
-        return $this;
-    }
-
-    /**
-     * Get furniture
-     *
-     * @return string
-     */
-    public function getFurniture()
-    {
-        return $this->furniture;
+        return $this->name;
     }
 }

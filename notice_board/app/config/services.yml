@@ -1,6 +1,8 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
+    locale: 'pl'
+    uploads_directory: "%kernel.project_dir%/uploads/img"
     #parameter_name: value
 
 services:

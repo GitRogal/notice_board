@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Notice</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ notice.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ notice.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ notice.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ notice.image }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if notice.date %}{{ notice.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('notices_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('notices_edit', { 'id': notice.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
