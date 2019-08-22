@@ -18,13 +18,13 @@ class NoticesType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('date')
-            ->add('my_file', FileType::class, [
+            ->add('imageName', FileType::class, [
                 'mapped' => false,
                 'label' => 'Dodaj zdjęcie'
             ]);
     }
 
-    /**z
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

@@ -5,9 +5,9 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
+    {{ form_row(form.imageName) }}
     <input type="submit" value="Create"/>
     {{ form_end(form) }}
-
     <ul>
         <li>
             <a href="{{ path('notices_index') }}">Back to the list</a>

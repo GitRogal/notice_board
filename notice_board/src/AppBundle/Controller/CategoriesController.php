@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Category controller.
@@ -19,6 +20,7 @@ class CategoriesController extends Controller
      * Lists all category entities.
      *
      * @Route("/", name="categories_index", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -35,10 +37,11 @@ class CategoriesController extends Controller
      * Creates a new category entity.
      *
      * @Route("/new", name="categories_new", methods={"GET", "POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request)
     {
-        $category = new Category();
+        $category = new Categories();
         $form = $this->createForm('AppBundle\Form\CategoriesType', $category);
         $form->handleRequest($request);
 
@@ -60,6 +63,8 @@ class CategoriesController extends Controller
      * Finds and displays a category entity.
      *
      * @Route("/{id}", name="categories_show", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
+     *
      */
     public function showAction(Categories $category)
     {
@@ -75,6 +80,7 @@ class CategoriesController extends Controller
      * Displays a form to edit an existing category entity.
      *
      * @Route("/{id}/edit", name="categories_edit", methods={"GET", "POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request, Categories $category)
     {
@@ -99,6 +105,7 @@ class CategoriesController extends Controller
      * Deletes a category entity.
      *
      * @Route("/{id}", name="categories_delete", methods={"DELETE"})
+     * @Security("has_role('ROLE_ADMIN)")
      */
     public function deleteAction(Request $request, Categories $category)
     {

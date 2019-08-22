@@ -38,9 +38,9 @@ class Notices
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="imageName", type="string", length=255)
      */
-    private $image;
+    private $imageName;
 
     /**
      * @var \DateTime
@@ -109,30 +109,6 @@ class Notices
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Notices
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set date
      *
      * @param \DateTime $date
@@ -154,5 +130,29 @@ class Notices
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     *
+     * @return Notices
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * Get imageName
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
     }
 }

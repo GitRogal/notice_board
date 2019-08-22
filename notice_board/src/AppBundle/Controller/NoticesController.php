@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Transliterator;
 
 /**
  * Notice controller.
@@ -42,22 +46,25 @@ class NoticesController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $img = $request->files->get('post');
-            var_dump($img);
-//            $uploadDir = $this->getParameter('uploads_directory');
-//
-//            $imgName = md5(uniqid()) . '.' . $img->guessExtension();
-//
-//            $img->move(
-//                $uploadDir, $imgName
-//            );
+            $imageFile = $form['imageName']->getData();
 
-//            $notice->setImage($imgName);
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($notice);
-//            $em->flush();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+//                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
-//            return $this->redirectToRoute('notices_show', array('id' => $notice->getId()));
+                $imageFile->move(
+                    $this->getParameter('uploads_directory'),
+                    $newFilename
+                );
+                $notice->setImageName($newFilename);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($notice);
+            $em->flush();
+
+            return $this->redirectToRoute('notices_show', array('id' => $notice->getId()));
         }
 
         return $this->render('notices/new.html.twig', array(
@@ -136,7 +143,6 @@ class NoticesController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('notices_delete', array('id' => $notice->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

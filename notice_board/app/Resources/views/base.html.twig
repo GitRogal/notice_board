@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 {% block head %}
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Tablica Ogłoszeń{% endblock %}</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Tablica Ogłoszeń{% endblock %}</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    </head>
 {% endblock %}
 {% block body %}
     <body>
@@ -23,16 +23,24 @@
             <div class="nav">
                 <ol>
                     <li><a href="/">Strona Główna</a></li>
-                    <li><a href="/">Ogłoszenia</a></a>
+                    <li><a href="/">Ogłoszenia</a>
                         <ul>
                             <li><a href="/">Samochody</a></li>
                             <li><a href="/">Meble</a></li>
                             <li><a href="/">Domy</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ path('notices_new') }}">Dodaj ogłoszenie</a></a>
-                    <li><a href="/register">Zarejestruj się</a></li>
-                    <li><a href="/login">Zaloguj się</a></li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('notices_new') }}">Dodaj</a></li>
+                    {% endif %}
+                    {% if not is_granted('ROLE_USER') %}
+                        <li><a href="{{path('fos_user_registration_register')}}">Zarejestruj się</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('fos_user_security_logout') }}">Wyloguj się</a></li>
+                    {% else %}
+                        <li><a href="{{ path('fos_user_security_login') }}">Zaloguj się</a></li>
+                    {% endif %}
                 </ol>
             </div>
         {% endblock %}
