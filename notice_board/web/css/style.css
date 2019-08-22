@@ -1,10 +1,25 @@
 body
 {
-    background-image: url("../img/andromeda.jpg"); 	/* Tło */
-    background-size: auto;							/* Rozmiar tła - pokrycie */
-    background-attachment: fixed;					/* Nieruchome tło */
-    font-family: 'Lato', sans-serif;				/* Krój czcionki */
+    background-image: url("../img/notice_board.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Lato', sans-serif;
     margin: 0!important;
+}
+
+.container
+{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header
+{
+    text-align: center;
+    font-size: 35px;
+    letter-spacing: 15px;
+    color: white;
 }
 
 .nav
@@ -12,4 +27,91 @@ body
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+.comments 	/* Ustawienia wyświetlanej zawartości na stronie głównej */
+{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+ol 	/* Ustawienia listy numerowanej w menu górnym (nav) */
+{
+    margin: 0;
+    padding: 0;
+    list-style-type: none; /* sposób wyświetlania listy - brak */
+    font-size: 22px;
+    height: 35px;
+    line-height: 150%; /* odstęp między liniami tekstu */
+    display: inline-block; /* polecenia wyświetlania jako elementu blokowego */
+    background-color: #000000;
+}
+
+ol a 	/* Ustawienia wyświetlania hiperłącza listy numerowanej */
+{
+    color: #999999;
+    text-decoration: none;
+    display: block;
+}
+
+ol > li		/* Ustawienia elementu listy numerowanej */
+{
+    float: left;
+    width: 150px;
+    height: 35px;
+    border-right: 2px solid #444444;
+}
+
+ol > li:first-child	 /* Ustawienia pierwszego elementu listy numerowanej */
+{
+    border-left: 2px solid #444444;
+}
+
+ol > li:hover 	/* Ustawienia elementu listy numerowanej po najechaniu kursorem */
+{
+    background-color: #262626;
+}
+
+ol > li:hover > a 	/* Ustawienia hiperłącza elementu listy numerowanej po najechaniu kursorem */
+{
+    color: #e6e6e6;
+}
+
+ol> li > ul 	/* Ustawienia listy nienumerowanej zagnieżdżonej w liście numerowanej */
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 35px;
+    display: none;  /* polecenie - nie wyświetlaj */
+}
+
+ol > li:hover > ul 	/* Ustawienia listy nienumerowanej zagnieżdżonej w liście numerowanej po najechaniu kursorem */
+{
+    display: block;
+}
+
+ol > li > ul > li	/* Ustawienia elementu listy nienumerowanej */
+{
+    position: relative;
+    z-index: 100;
+    border-top: 2px dashed #444444;
+    background-color: #000000;
+}
+
+ol > li > ul > li:hover	 /* Ustawienia elementu listy nienumerowanej po najechaniu kursorem */
+{
+    background-color: #262626;
+}
+
+ol > li > ul > li:hover > a 	/* Ustawienia hiperłącza elementu listy nienumerowanej po najechaniu kursorem */
+{
+    color: #e6e6e6;
+}
+
+a.plink 	/* Ustawienia wyświetlania hiperłącza w footerze */
+{
+    color: #000000;
+    text-decoration: none;
 }

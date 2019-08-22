@@ -3,57 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Tablica Ogłoszeń{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 </head>
 <body>
 {% block body %}
-    <h1>Tablica Ogłoszeń</h1>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="plink"><h1>Tablica ogłoszeń</h1></a>
+        </div>
 
-{% block menu %}
-    <div class="nav">
-        <ol>
-            <li><a href="/">Strona Główna</a></li>
-            <li><a href="/">Ogłoszenia</a></a>
-                <ul>
-                    <li><a href="/">Samochody</a></li>
-                    <li><a href="/">Meble</a></li>
-                    <li><a href="/">Domy</a></li>
-                </ul>
-            </li>
-            <li><a href="/register">Zarejestruj się</a></li>
-            <li><a href="/login">Zaloguj się</a></li>
-        </ol>
+        {% block menu %}
+            <div class="nav">
+                <ol>
+                    <li><a href="/">Strona Główna</a></li>
+                    <li><a href="/">Ogłoszenia</a></a>
+                        <ul>
+                            <li><a href="/">Samochody</a></li>
+                            <li><a href="/">Meble</a></li>
+                            <li><a href="/">Domy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/register">Zarejestruj się</a></li>
+                    <li><a href="/login">Zaloguj się</a></li>
+                </ol>
+            </div>
+        {% endblock %}
+
+    <div class="comments">
+        <form action="/html/tags/html_form_tag_action.cfm" method="post">
+            <div>
+            <textarea name="comments" id="comments" style="font-family:sans-serif;font-size:1.2em;">
+                Hey... say something!
+        </textarea>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
     </div>
 {% endblock %}
 
-    <table border="1" style="width: 80%;">
-        <thead>
-        <tr>
-            <td>Product</td>
-            <td>Description</td>
-            <td>Value</td>
-            <td>Date</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>product</td>
-            <td>productdescription</td>
-            <td>productvalue</td>
-            <td>product</td>
-        </tr>
-        </tbody>
-    </table>
 
-    <div id="content">
 
-    </div>
-{% endblock %}
 {% block javascripts %}
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
