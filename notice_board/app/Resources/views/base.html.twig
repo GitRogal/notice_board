@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Notice Board{% endblock %}</title>
+</head>
+<body>
+<div id="sidebar">
+    {% block sidebar %}
+        <div><a href="/">Strona Główna</a></div>
+        <div><a href="/register">Zarejestruj się</a></div>
+        <div><a href="/login">Zaloguj się</a></div>
+    {% endblock %}
+</div>
+
+<div id="content">
+    {% block body %}{% endblock %}
+</div>
+</body>
+</html>
+
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    {% block head %}#}
+{#        <link rel="stylesheet" href="style.css" />#}
+{#        <title>{% block title %}{% endblock %} - My Webpage</title>#}
+{#    {% endblock %}#}
+{#</head>#}
+{#<body>#}
+{#<div id="content">{% block content %}{% endblock %}</div>#}
+{#<div id="footer">#}
+{#    {% block footer %}#}
+{#        &copy; Copyright 2011 by <a href="http://domain.invalid/">you</a>.#}
+{#    {% endblock %}#}
+{#</div>#}
+{#</body>#}
+{#</html>#}
