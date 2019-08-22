@@ -9,8 +9,9 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-{% block body %}
-    <div class="container">
+<div class="container">
+    {% block body %}
+
         <div class="header">
             <a href="/" class="plink"><h1>Tablica ogłoszeń</h1></a>
         </div>
@@ -48,11 +49,9 @@
                        class="search-input">
             </form>
         </div>
-    </div>
-{% endblock %}
 
-
-
+    {% endblock %}
+</div>
 {% block javascripts %}
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
