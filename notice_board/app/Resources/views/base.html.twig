@@ -32,17 +32,22 @@
             </div>
         {% endblock %}
 
-    <div class="comments">
-        <form action="/html/tags/html_form_tag_action.cfm" method="post">
-            <div>
-            <textarea name="comments" id="comments" style="font-family:sans-serif;font-size:1.2em;">
-                Hey... say something!
-        </textarea>
-            </div>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+        <div class="comments">
+            <form action="/html/tags/html_form_tag_action.cfm" method="post">
+                <div>
+            <textarea name="comments" id="comments" style="font-family:sans-serif; font-size:1.2em;">Hej... napisz komentarz!
+            </textarea>
+                </div>
+                <input type="submit" value="Dodaj komentarz">
+            </form>
+        </div>
 
+        <div class="search-bar">
+            <form method="GET" action="" class="js-sea-search sea-search">
+                <input type="search" name="q" placeholder="Search Sea Creatures" autocomplete="off"
+                       class="search-input">
+            </form>
+        </div>
     </div>
 {% endblock %}
 
