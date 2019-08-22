@@ -2,37 +2,61 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Notice Board{% endblock %}</title>
+    <title>{% block title %}Tablica Ogłoszeń{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="sidebar">
-    {% block sidebar %}
-        <div><a href="/">Strona Główna</a></div>
-        <div><a href="/register">Zarejestruj się</a></div>
-        <div><a href="/login">Zaloguj się</a></div>
-    {% endblock %}
-</div>
+{% block body %}
+    <h1>Tablica Ogłoszeń</h1>
 
-<div id="content">
-    {% block body %}{% endblock %}
-</div>
+{% block menu %}
+    <div class="nav">
+        <ol>
+            <li><a href="/">Strona Główna</a></li>
+            <li><a href="/">Ogłoszenia</a></a>
+                <ul>
+                    <li><a href="/">Samochody</a></li>
+                    <li><a href="/">Meble</a></li>
+                    <li><a href="/">Domy</a></li>
+                </ul>
+            </li>
+            <li><a href="/register">Zarejestruj się</a></li>
+            <li><a href="/login">Zaloguj się</a></li>
+        </ol>
+    </div>
+{% endblock %}
+
+    <table border="1" style="width: 80%;">
+        <thead>
+        <tr>
+            <td>Product</td>
+            <td>Description</td>
+            <td>Value</td>
+            <td>Date</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>product</td>
+            <td>productdescription</td>
+            <td>productvalue</td>
+            <td>product</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="content">
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+{% endblock %}
 </body>
 </html>
-
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#    {% block head %}#}
-{#        <link rel="stylesheet" href="style.css" />#}
-{#        <title>{% block title %}{% endblock %} - My Webpage</title>#}
-{#    {% endblock %}#}
-{#</head>#}
-{#<body>#}
-{#<div id="content">{% block content %}{% endblock %}</div>#}
-{#<div id="footer">#}
-{#    {% block footer %}#}
-{#        &copy; Copyright 2011 by <a href="http://domain.invalid/">you</a>.#}
-{#    {% endblock %}#}
-{#</div>#}
-{#</body>#}
-{#</html>#}

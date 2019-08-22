@@ -1,0 +1,15 @@
+body
+{
+    background-image: url("../img/andromeda.jpg"); 	/* Tło */
+    background-size: auto;							/* Rozmiar tła - pokrycie */
+    background-attachment: fixed;					/* Nieruchome tło */
+    font-family: 'Lato', sans-serif;				/* Krój czcionki */
+    margin: 0!important;
+}
+
+.nav
+{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
