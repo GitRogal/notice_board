@@ -1,6 +1,6 @@
 body
 {
-    background-image: url("../img/notice_board.jpg");
+    background-color: darkgrey;
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Lato', sans-serif;
@@ -19,7 +19,7 @@ body
     text-align: center;
     font-size: 35px;
     letter-spacing: 15px;
-    color: white;
+    color: black;
 }
 
 .nav

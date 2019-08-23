@@ -29,6 +29,10 @@ security:
                 csrf_token_generator: security.csrf.token_manager
             logout: true
             anonymous: true
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

@@ -16,7 +16,7 @@
     <div class="container">
 
         <div class="header">
-            <a href="/" class="plink"><h1>Tablica ogłoszeń</h1></a>
+            <h1>Tablica ogłoszeń</h1>
         </div>
 
         {% block menu %}
@@ -44,16 +44,6 @@
             </div>
         {% endblock %}
 
-        {% block comments %}
-            <div class="comments">
-                <form action="/html/tags/html_form_tag_action.cfm" method="post">
-                    <div>
-            <textarea name="comments" id="comments" style="font-family:sans-serif; font-size:1.2em;"></textarea>
-                    </div>
-                    <input type="submit" value="Dodaj komentarz">
-                </form>
-            </div>
-        {% endblock %}
 
         <div class="search-bar">
             <form method="GET" action="" class="js-sea-search sea-search">
@@ -70,3 +60,4 @@
     </body>
 {% endblock %}
 </html>
+
