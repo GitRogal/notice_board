@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Notices list</h1>
+    <h1>Lista ogłoszeń</h1>
 
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th>Nr.</th>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Data</th>
             </tr>
         </thead>
         <tbody>
@@ -23,11 +22,11 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('notices_show', { 'id': notice.id }) }}">show</a>
+                            <a href="{{ path('notices_show', { 'id': notice.id }) }}">Pokaż ogłoszenie</a>
                         </li>
-                        <li>
-                            <a href="{{ path('notices_edit', { 'id': notice.id }) }}">edit</a>
-                        </li>
+                        {% if is_granted('ROLE_USER') %}
+                            <li><a href="{{ path('notices_edit', { 'id': notice.id }) }}">Edytuj ogłoszenie</a></li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
@@ -37,7 +36,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('notices_new') }}">Create a new notice</a>
+            <a href="{{ path('notices_new') }}">Dodaj nowe ogłoszenie</a>
         </li>
     </ul>
 {% endblock %}

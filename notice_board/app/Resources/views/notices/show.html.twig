@@ -1,20 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Notice</h1>
-
+    <h1>Ogłoszenie</h1>
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ notice.id }}</td>
+                <th>Kategoria</th>
+                <td>{{ notice.categories.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Tytuł</th>
                 <td>{{ notice.title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Opis</th>
                 <td>{{ notice.description }}</td>
             </tr>
             <tr>
@@ -22,23 +21,23 @@
                 <td>{{ notice.imageName }}</td>
             </tr>
             <tr>
-                <th>Date</th>
+                <th>Data</th>
                 <td>{% if notice.date %}{{ notice.date|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('notices_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('notices_edit', { 'id': notice.id }) }}">Edit</a>
-        </li>
+        {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('notices_edit', { 'id': notice.id }) }}">Edytuj ogłoszenie</a></li>
+        {% endif %}
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Usuń ogłoszenie">
             {{ form_end(delete_form) }}
+        </li>
+        <li>
+            <a href="{{ path('notices_index') }}">Powrót do listy</a>
         </li>
     </ul>
 {% endblock %}
