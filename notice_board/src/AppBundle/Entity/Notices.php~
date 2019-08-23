@@ -131,4 +131,28 @@ class Notices
     {
         return $this->date;
     }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     *
+     * @return Notices
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * Get imageName
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
 }
