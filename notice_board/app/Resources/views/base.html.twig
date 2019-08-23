@@ -22,12 +22,12 @@
         {% block menu %}
             <div class="nav">
                 <ol>
-                    <li><a href="/">Ogłoszenia</a>
-                        <ul>
-                            <li><a href="/">Samochody</a></li>
-                            <li><a href="/">Meble</a></li>
-                            <li><a href="/">Domy</a></li>
-                        </ul>
+                    <li><a href="{{ path('notices_index') }}">Ogłoszenia</a>
+{#                        <ul>#}
+{#                            <li><a href="/">Samochody</a></li>#}
+{#                            <li><a href="/">Meble</a></li>#}
+{#                            <li><a href="/">Domy</a></li>#}
+{#                        </ul>#}
                     </li>
                     {% if is_granted('ROLE_USER') %}
                         <li><a href="{{ path('notices_new') }}">Dodaj</a></li>

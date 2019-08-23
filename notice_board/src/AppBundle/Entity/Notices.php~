@@ -26,6 +26,11 @@ class Notices
     private $categories;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="notice")
+     */
+    private $comments;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -192,12 +197,14 @@ class Notices
     {
         return $this->user;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -232,5 +239,53 @@ class Notices
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set categories
+     *
+     * @param \AppBundle\Entity\Categories $categories
+     *
+     * @return Notices
+     */
+    public function setCategories(\AppBundle\Entity\Categories $categories = null)
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Notices
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

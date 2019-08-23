@@ -2,33 +2,47 @@
 
 {% block body %}
     <h1>Ogłoszenie</h1>
+    {{ dump() }}
     <table>
         <tbody>
-            <tr>
-                <th>Kategoria</th>
-                <td>{{ notice.categories.id }}</td>
-            </tr>
-            <tr>
-                <th>Tytuł</th>
-                <td>{{ notice.title }}</td>
-            </tr>
-            <tr>
-                <th>Opis</th>
-                <td>{{ notice.description }}</td>
-            </tr>
-            <tr>
-                <th>Data</th>
-                <td>{% if notice.date %}{{ notice.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th><img src=" {{ asset('uploads/img/' ~ notice.imageName) }}" alt="Example"  width="400" height="375"/></th>
-            </tr>
+        <tr>
+            <th>Kategoria</th>
+            <td>{{ notice.categories.id }}</td>
+        </tr>
+        <tr>
+            <th>Tytuł</th>
+            <td>{{ notice.title }}</td>
+        </tr>
+        <tr>
+            <th>Opis</th>
+            <td>{{ notice.description }}</td>
+        </tr>
+        <tr>
+            <th>Data</th>
+            <td>{% if notice.date %}{{ notice.date|date('Y-m-d') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th><img src=" {{ asset('uploads/img/' ~ notice.imageName) }}" alt="Example" width="400" height="375"/></th>
+        </tr>
 
         </tbody>
     </table>
 
+    {% if notice.comments %}
+        {% for comment in notice.comments %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="comment-container d-inline-block pl-3 align-top">
+                        <span class="commenter-name">{{ comment.name }}</span>
+                        <span class="comment"> {{ comment.description }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
     {% block comments %}
-        <div class="comments">
+        <div class="row">
             <form action="/html/tags/html_form_tag_action.cfm" method="post">
                 <div>
                     <textarea name="comments" id="comments" style="font-family:sans-serif; font-size:1.2em;"></textarea>
@@ -42,13 +56,16 @@
         {% if is_granted('ROLE_USER') %}
             <li><a href="{{ path('notices_edit', { 'id': notice.id }) }}">Edytuj ogłoszenie</a></li>
         {% endif %}
-        <li>
-            {{ form_start(delete_form) }}
+        {% if is_granted('ROLE_USER') %}
+            <li>
+                {{ form_start(delete_form) }}
                 <input type="submit" value="Usuń ogłoszenie">
-            {{ form_end(delete_form) }}
-        </li>
+                {{ form_end(delete_form) }}
+            </li>
+        {% endif %}
         <li>
             <a href="{{ path('notices_index') }}">Powrót do listy</a>
         </li>
     </ul>
+    <div><p><a href="/">Strona Główna</a></p></div>
 {% endblock %}

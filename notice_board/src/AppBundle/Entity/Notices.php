@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Notices
@@ -24,6 +25,11 @@ class Notices
      * @ORM\JoinColumn(name="categories_id", referencedColumnName="id")
      */
     private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="notice")
+     */
+    private $comments;
 
     /**
      * @var int
@@ -59,6 +65,7 @@ class Notices
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $date;
 
@@ -192,12 +199,14 @@ class Notices
     {
         return $this->user;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -246,5 +255,39 @@ class Notices
         $this->categories = $categories;
 
         return $this;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Notices
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

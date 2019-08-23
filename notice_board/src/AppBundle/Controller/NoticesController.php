@@ -121,6 +121,7 @@ class NoticesController extends Controller
      * Deletes a notice entity.
      *
      * @Route("/{id}", name="notices_delete", methods={"DELETE"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction(Request $request, Notices $notice)
     {

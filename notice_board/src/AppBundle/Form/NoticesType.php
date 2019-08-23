@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Categories;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -31,8 +32,11 @@ class NoticesType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Opis'
             ])
-            ->add('date', DateType::class, [
-                'label' => 'Data'
+            ->add('date', DateTimeType::class, [
+                "widget" => 'single_text',
+                "format" => 'dd-MM-yyyy',
+                "data" => new \DateTime(),
+                'label' => 'Data dodania'
             ])
             ->add('imageName', FileType::class, [
                 'mapped' => false,
