@@ -60,6 +60,9 @@ class NoticesController extends Controller
                 );
                 $notice->setImageName($newFilename);
             }
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            //$id = $user->getId();
+            $notice->setUser($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($notice);

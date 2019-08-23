@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -22,9 +23,15 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Notices", mappedBy="user")
+     */
+    private $notices;
+
     public function __construct()
     {
         parent::__construct();
+        $this->notices = new ArrayCollection();
     }
 
     /**
@@ -35,5 +42,39 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add notice
+     *
+     * @param \AppBundle\Entity\Notices $notice
+     *
+     * @return User
+     */
+    public function addNotice(\AppBundle\Entity\Notices $notice)
+    {
+        $this->notices[] = $notice;
+
+        return $this;
+    }
+
+    /**
+     * Remove notice
+     *
+     * @param \AppBundle\Entity\Notices $notice
+     */
+    public function removeNotice(\AppBundle\Entity\Notices $notice)
+    {
+        $this->notices->removeElement($notice);
+    }
+
+    /**
+     * Get notices
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotices()
+    {
+        return $this->notices;
     }
 }

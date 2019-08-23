@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Notices
 {
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="notices")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -154,5 +160,29 @@ class Notices
     public function getImageName()
     {
         return $this->imageName;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Notices
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
