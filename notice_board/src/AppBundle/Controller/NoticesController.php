@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Transliterator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Notice controller.
@@ -38,6 +38,7 @@ class NoticesController extends Controller
     /**
      * Creates a new notice entity.
      * @Route("/new", name="notices_new", methods={"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function newAction(Request $request)
     {
@@ -92,6 +93,7 @@ class NoticesController extends Controller
      * Displays a form to edit an existing notice entity.
      *
      * @Route("/{id}/edit", name="notices_edit", methods={"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, Notices $notice)
     {
