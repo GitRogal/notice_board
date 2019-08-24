@@ -6,11 +6,6 @@ parameters:
     #parameter_name: value
 
 services:
-    app.form.registration:
-        class: AppBundle\Form\RegistrationType
-        tags:
-            - { name: form.type, alias: app_user_registration }
-
     app.redirect_after_registration:
         class: AppBundle\EventListener\RedirectAfterRegistration
         autowire: true
