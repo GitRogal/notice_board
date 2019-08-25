@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * Comment
@@ -12,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comment
 {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Notices", inversedBy="comments")
+     * @ORM\JoinColumn(name="notice_id", referencedColumnName="id")
+     */
+    private $notice;
 
     /**
      * @var int
@@ -107,5 +114,15 @@ class Comment
         $this->notice = $notice;
 
         return $this;
+    }
+
+    /**
+     * Get notice
+     *
+     * @return \AppBundle\Entity\Notices
+     */
+    public function getNotice()
+    {
+        return $this->notice;
     }
 }

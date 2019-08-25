@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Notices;
+use AppBundle\Repository\NoticesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,6 +13,7 @@ use Symfony\Component\HttpFoundation\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Notice controller.
@@ -26,6 +29,26 @@ class NoticesController extends Controller
      */
     public function indexAction()
     {
+
+        /** @var NoticesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Notices');
+        $noticesByTime = $repository->findOrderedByTime();
+
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('AppBundle:Categories')->findAll();
+
+        return $this->render('notices/index.html.twig', array(
+            'notices' => $noticesByTime,
+        ));
+    }
+
+    /**
+     * Lists all notice entities.
+     *
+     * @Route("/", name="notices_all", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function showAllAction(){
         $em = $this->getDoctrine()->getManager();
 
         $notices = $em->getRepository('AppBundle:Notices')->findAll();
@@ -43,6 +66,7 @@ class NoticesController extends Controller
     public function newAction(Request $request)
     {
         $notice = new Notices();
+
         $form = $this->createForm('AppBundle\Form\NoticesType', $notice);
         $form->handleRequest($request);
 
@@ -51,8 +75,8 @@ class NoticesController extends Controller
 
             if ($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-//                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
                 $imageFile->move(
                     $this->getParameter('uploads_directory'),
@@ -61,14 +85,13 @@ class NoticesController extends Controller
                 $notice->setImageName($newFilename);
             }
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
-            //$id = $user->getId();
             $notice->setUser($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($notice);
             $em->flush();
 
-            return $this->redirectToRoute('notices_show', array('id' => $notice->getId()));
+            return $this->redirectToRoute('notices_show', array('id' => $notice->getId(), 'name' => $name));
         }
 
         return $this->render('notices/new.html.twig', array(
@@ -80,13 +103,15 @@ class NoticesController extends Controller
     /**
      * Finds and displays a notice entity.
      *
-     * @Route("/{id}", name="notices_show", methods={"GET"})
+     * @Route("/{id}", name="notices_show", methods={"GET", "POST"})
      */
     public function showAction(Notices $notice)
     {
         $deleteForm = $this->createDeleteForm($notice);
-
+        $categories = $notice->getCategories();
+        $name = $categories->getName();
         return $this->render('notices/show.html.twig', array(
+            'name' => $name,
             'notice' => $notice,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -152,3 +177,4 @@ class NoticesController extends Controller
             ->getForm();
     }
 }
+

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ffb93d7a556a5b286f2e1e946f82b6c",
+    "content-hash": "0042db73d7cab12e91189d95977d8a7c",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1691,6 +1691,154 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2018-12-19T17:14:59+00:00"
+        },
+        {
+            "name": "sonata-project/exporter",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/exporter.git",
+                "reference": "9e84fd03ef0c696b9b4e9617b73cb6defaf3b476"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/9e84fd03ef0c696b9b4e9617b73cb6defaf3b476",
+                "reference": "9e84fd03ef0c696b9b4e9617b73cb6defaf3b476",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^2.5",
+                "doctrine/orm": "^2.4.5",
+                "matthiasnoback/symfony-config-test": "^4.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^3.0",
+                "propel/propel1": "^1.6",
+                "symfony/config": "^3.4 || ^4.0",
+                "symfony/dependency-injection": "^3.4 || ^4.0",
+                "symfony/http-foundation": "^3.4 || ^4.0",
+                "symfony/http-kernel": "^3.4 || ^4.0",
+                "symfony/phpunit-bridge": "^4.1",
+                "symfony/property-access": "^3.4 || ^4.0",
+                "symfony/routing": "^3.4 || ^4.0"
+            },
+            "suggest": {
+                "ext-curl": "*",
+                "propel/propel1": "^1.6",
+                "symfony/property-access": "To be able to export from database entities",
+                "symfony/routing": "To be able to export the routes of a Symfony app"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\Exporter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@gmail.com",
+                    "homepage": "https://sonata-project.org/"
+                }
+            ],
+            "description": "Lightweight Exporter library",
+            "homepage": "https://github.com/sonata-project/Exporter",
+            "keywords": [
+                "client",
+                "csv",
+                "data",
+                "export",
+                "xls"
+            ],
+            "time": "2019-01-26T10:32:20+00:00"
+        },
+        {
+            "name": "sonata-project/seo-bundle",
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/SonataSeoBundle.git",
+                "reference": "b0d586a6f52283c2f2abd85eb5c43e5f3d07662c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/SonataSeoBundle/zipball/b0d586a6f52283c2f2abd85eb5c43e5f3d07662c",
+                "reference": "b0d586a6f52283c2f2abd85eb5c43e5f3d07662c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "sonata-project/exporter": "^1.11 || ^2.0",
+                "symfony/config": "^2.8 || ^3.2 || ^4.0",
+                "symfony/dependency-injection": "^2.8 || ^3.2 || ^4.0",
+                "symfony/form": "^2.8 || ^3.2 || ^4.0",
+                "symfony/framework-bundle": "^2.8 || ^3.2 || ^4.0",
+                "symfony/http-foundation": "^2.8 || ^3.2 || ^4.0",
+                "symfony/http-kernel": "^2.8 || ^3.2 || ^4.0",
+                "symfony/options-resolver": "^2.8 || ^3.2 || ^4.0",
+                "twig/twig": "^1.35 || ^2.0"
+            },
+            "conflict": {
+                "sonata-project/block-bundle": "<3.11"
+            },
+            "require-dev": {
+                "guzzle/guzzle": "^3.8",
+                "sonata-project/admin-bundle": "^3.31",
+                "sonata-project/block-bundle": "^3.11",
+                "sonata-project/core-bundle": "^3.9",
+                "symfony/console": "^2.8 || ^3.2 || ^4.0",
+                "symfony/filesystem": "^2.8 || ^3.2 || ^4.0",
+                "symfony/finder": "^2.8 || ^3.2 || ^4.0",
+                "symfony/phpunit-bridge": "^4.1",
+                "symfony/yaml": "^2.8 || ^3.2 || ^4.0"
+            },
+            "suggest": {
+                "guzzle/guzzle": "3.*",
+                "knplabs/knp-menu-bundle": "Used by the BreadcrumbMenuBuilder"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\SeoBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataSeoBundle/contributors"
+                },
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org",
+                    "homepage": "https://sonata-project.org"
+                }
+            ],
+            "description": "Symfony SonataSeoBundle",
+            "homepage": "https://sonata-project.org/bundles/seo",
+            "keywords": [
+                "seo",
+                "sonata"
+            ],
+            "time": "2019-01-23T21:59:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

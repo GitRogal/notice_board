@@ -5,30 +5,35 @@
 
     <table>
         <thead>
-            <tr>
-                <th>Nr.</th>
-                <th>Tytuł</th>
-                <th>Opis</th>
-                <th>Data</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Nr.</th>
+            <th>Kategoria</th>
+            <th>Tytuł</th>
+            <th>Opis</th>
+            <th>Data</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         {% for notice in notices %}
             <tr>
                 <td><a href="{{ path('notices_show', { 'id': notice.id }) }}">{{ notice.id }}</a></td>
                 <td>{{ notice.title }}</td>
+                <td>{{ notice.title }}</td>
                 <td>{{ notice.description }}</td>
-                <td>{% if notice.date %}{{ notice.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if notice.date %}{{ notice.date|date('Y-m-d') }}{% endif %}</td>
 
-                <td><img src=" {{ asset('uploads/img/' ~ notice.imageName) }}" alt="Example"  width="100" height="100"/></td>
+                <td><img src=" {{ asset('uploads/img/' ~ notice.imageName) }}" alt="Example" width="100" height="100"/>
+                </td>
                 <td>
                     <ul>
                         <li>
                             <a href="{{ path('notices_show', { 'id': notice.id }) }}">Pokaż ogłoszenie</a>
                         </li>
-                        {% if is_granted('ROLE_USER') %}
-                            <li><a href="{{ path('notices_edit', { 'id': notice.id }) }}">Edytuj ogłoszenie</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li>
+                                <a href="{{ path('notices_edit', { 'id': notice.id }) }}">Edytuj</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </td>

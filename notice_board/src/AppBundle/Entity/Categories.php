@@ -28,7 +28,6 @@ class Categories
      */
     private $name;
 
-
     /**
      * Get id
      *
@@ -49,7 +48,6 @@ class Categories
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 

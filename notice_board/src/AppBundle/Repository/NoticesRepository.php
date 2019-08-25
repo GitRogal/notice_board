@@ -10,4 +10,10 @@ namespace AppBundle\Repository;
  */
 class NoticesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findOrderedByTime() {
+        $em = $this->getEntityManager();
+        $notices = $em->createQuery('SELECT n FROM AppBundle:Notices n WHERE n.date > CURRENT_TIMESTAMP()')->getResult();
+        return $notices;
+    }
+
 }

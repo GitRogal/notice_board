@@ -35,8 +35,8 @@ class NoticesType extends AbstractType
             ->add('date', DateTimeType::class, [
                 "widget" => 'single_text',
                 "format" => 'dd-MM-yyyy',
-                "data" => new \DateTime(),
-                'label' => 'Data dodania'
+                "data" => new \DateTime("30 days"),
+                'label' => 'Data wygaśnięcia'
             ])
             ->add('imageName', FileType::class, [
                 'mapped' => false,
@@ -61,6 +61,4 @@ class NoticesType extends AbstractType
     {
         return 'appbundle_notices';
     }
-
-
 }

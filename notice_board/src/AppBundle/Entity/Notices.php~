@@ -15,6 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Notices
 {
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="notice")
+     */
+    private $comments;
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="notices")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -60,7 +64,7 @@ class Notices
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
-     * @Assert\GreaterThan("today")
+     * @Assert\EqualTo("today")
      */
     private $date;
 

@@ -15,6 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Notices
 {
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="notice")
+     */
+    private $comments;
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="notices")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -60,7 +64,6 @@ class Notices
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
-     * @Assert\GreaterThan("today")
      */
     private $date;
 
@@ -249,5 +252,39 @@ class Notices
         $this->categories = $categories;
 
         return $this;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Notices
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
