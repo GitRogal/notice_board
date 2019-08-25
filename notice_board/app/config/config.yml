@@ -84,7 +84,7 @@ fos_user:
 
 sonata_seo:
     page:
-        title: Page's default title
+        title: Tablica ogłoszeń
         metas:
             name:
                 description: The default description of the page

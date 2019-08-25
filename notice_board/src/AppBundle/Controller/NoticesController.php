@@ -91,7 +91,8 @@ class NoticesController extends Controller
             $em->persist($notice);
             $em->flush();
 
-            return $this->redirectToRoute('notices_show', array('id' => $notice->getId(), 'name' => $name));
+
+            return $this->redirectToRoute('notices_show', array('id' => $notice->getId()));
         }
 
         return $this->render('notices/new.html.twig', array(

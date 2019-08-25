@@ -5,9 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Notices;
 use AppBundle\Entity\User;
+use AppBundle\EventListener\CommentPublishedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +42,7 @@ class CommentController extends Controller
     /**
      * @Route("/saveComment/{id}", name="saveComment", methods={"POST"})
      */
-    public function saveCommentAction(Request $request, $id)
+    public function saveCommentAction(Request $request, $id, EventDispatcherInterface $dispatcher)
     {
 
         $commentDesc = $request->request->get('description');
@@ -62,6 +64,9 @@ class CommentController extends Controller
 
         $em->persist($newComment);
         $em->flush();
+
+        $event = new CommentPublishedEvent($newComment);
+//        $dispatcher->dispatch(CommentPublishedEvent::NAME, $event);
         return $this->redirectToRoute('notices_show', ['id' => $id]);
     }
 
@@ -69,6 +74,7 @@ class CommentController extends Controller
      * Finds and displays a comment entity.
      *
      * @Route("/{id}", name="comment_show", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function showAction(Comment $comment)
     {
@@ -108,6 +114,7 @@ class CommentController extends Controller
      * Deletes a comment entity.
      *
      * @Route("/{id}", name="comment_delete", methods={"DELETE"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Comment $comment)
     {
